@@ -1,0 +1,11 @@
+D:\Projects\ForWork\BitBox\CodeBitBox\bin\Debug\CodeBitBox.exe.config
+D:\Projects\ForWork\BitBox\CodeBitBox\bin\Debug\CodeBitBox.exe
+D:\Projects\ForWork\BitBox\CodeBitBox\bin\Debug\CodeBitBox.pdb
+D:\Projects\ForWork\BitBox\CodeBitBox\obj\Debug\CodeBitBox.csprojResolveAssemblyReference.cache
+D:\Projects\ForWork\BitBox\CodeBitBox\obj\Debug\CodeBitBox.Form1.resources
+D:\Projects\ForWork\BitBox\CodeBitBox\obj\Debug\CodeBitBox.Properties.Resources.resources
+D:\Projects\ForWork\BitBox\CodeBitBox\obj\Debug\CodeBitBox.csproj.GenerateResource.Cache
+D:\Projects\ForWork\BitBox\CodeBitBox\obj\Debug\CodeBitBox.exe
+D:\Projects\ForWork\BitBox\CodeBitBox\obj\Debug\CodeBitBox.pdb
+D:\Projects\ForWork\BitBox\CodeBitBox\bin\Debug\MaterialSkin.dll
+D:\Projects\ForWork\BitBox\CodeBitBox\bin\Debug\jSkin.dll
