@@ -39,9 +39,6 @@
             System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("HTML", 3);
             System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem("CSS", 4);
             System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem("SQL", 5);
-            System.Windows.Forms.ListViewItem listViewItem7 = new System.Windows.Forms.ListViewItem(new string[] {
-            "Некий кусочек кода",
-            "Описание этого кусочка кода"}, 0);
             this.materialContextMenuStrip1 = new MaterialSkin.Controls.MaterialContextMenuStrip();
             this.item1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
@@ -251,9 +248,6 @@
             this.columnHeader1,
             this.columnHeader2});
             this.listView2.ForeColor = System.Drawing.Color.White;
-            listViewItem7.Tag = "ТЭГ";
-            this.listView2.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem7});
             this.listView2.LargeImageList = this.imageList1;
             this.listView2.Location = new System.Drawing.Point(229, 109);
             this.listView2.Name = "listView2";

@@ -12,14 +12,33 @@ using System.Windows.Forms;
 using ICSharpCode.TextEditor.Document;
 using System.IO;
 using System.Diagnostics;
+using System.Data.SQLite;
 
 namespace CodeBitBox
 {
     public partial class Form1 : MaterialForm
     {
         int ActiveLang = 0;
+        string baseName = "codebit.sqlite";
+        SQLiteConnection connection;
+
         public Form1() {
             InitializeComponent();
+
+            connection = new SQLiteConnection(string.Format("Data Source={0};", baseName));
+            connection.Open();
+            SQLiteCommand command = new SQLiteCommand("SELECT `id`, `Name`, `Description`, `Language` FROM `UserBits`;", connection);
+            SQLiteDataReader CodeBits = command.ExecuteReader();
+
+            while (CodeBits.Read())
+            {
+                ListViewItem lvi;
+                lvi = listView2.Items.Add(CodeBits.GetString(1));
+                lvi.ImageIndex = CodeBits.GetInt16(3);
+                lvi.SubItems.Add(CodeBits.GetString(2));
+
+            }
+            connection.Close();
 
             var materialSkinManager = MaterialSkinManager.Instance;
             materialSkinManager.AddFormToManage(this);
