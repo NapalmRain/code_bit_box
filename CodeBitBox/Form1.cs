@@ -19,6 +19,7 @@ namespace CodeBitBox
     public partial class Form1 : MaterialForm
     {
         int ActiveLang = 0;
+        string ActiveBit = '0';
         string baseName = "codebit.sqlite";
         SQLiteConnection connection;
 
@@ -27,15 +28,16 @@ namespace CodeBitBox
 
             connection = new SQLiteConnection(string.Format("Data Source={0};", baseName));
             connection.Open();
-            SQLiteCommand command = new SQLiteCommand("SELECT `id`, `Name`, `Description`, `Language` FROM `UserBits`;", connection);
+            SQLiteCommand command = new SQLiteCommand("SELECT `id`, `Name`, `Description`, `Language` FROM `UserBits` WHERE `Language` = '"+ActiveLang.ToString()+"';", connection);
             SQLiteDataReader CodeBits = command.ExecuteReader();
 
             while (CodeBits.Read())
             {
                 ListViewItem lvi;
-                lvi = listView2.Items.Add(CodeBits.GetString(1));
+                lvi = listView2.Items.Add(CodeBits.GetString(1), CodeBits.GetInt16(0));
                 lvi.ImageIndex = CodeBits.GetInt16(3);
                 lvi.SubItems.Add(CodeBits.GetString(2));
+                lvi.SubItems.Add(CodeBits.GetInt16(0).ToString());
 
             }
             connection.Close();
@@ -90,6 +92,29 @@ namespace CodeBitBox
                     ForCode.SetHighlighting("SQL");
                     break;
             }
+        }
+
+        private void listView2_SelectedIndexChanged(object sender, EventArgs e) {
+            ActiveBit = listView2.Items[listView2.SelectedIndices[0]].SubItems[2].Text;
+            connection.Open();
+            SQLiteCommand command = new SQLiteCommand("SELECT `Syntax`, `Name`, `Description` FROM `UserBits` WHERE `id` = '" + ActiveBit + "';", connection);
+            SQLiteDataReader CodeBits = command.ExecuteReader();
+
+            while (CodeBits.Read())
+            {
+                NameOfBit.Text = CodeBits.GetString(1);
+                DescOfBit.Text = CodeBits.GetString(2);
+                ForCode.Text = CodeBits.GetString(0);
+            }
+            connection.Close();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            connection.Open();
+            SQLiteCommand command = new SQLiteCommand("UPDATE `UserBits` SET `Name` = '"+NameOfBit.Text+"' WHERE `id` = '" + ActiveBit + "';", connection);
+                        
+            connection.Close();
         }
     }
 }

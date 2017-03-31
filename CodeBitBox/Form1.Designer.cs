@@ -56,6 +56,7 @@
             this.listView2 = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.button2 = new System.Windows.Forms.Button();
             this.materialContextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -142,7 +143,7 @@
             this.materialLabel1.Depth = 0;
             this.materialLabel1.Font = new System.Drawing.Font("Roboto", 11F);
             this.materialLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel1.Location = new System.Drawing.Point(478, 78);
+            this.materialLabel1.Location = new System.Drawing.Point(478, 73);
             this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel1.Name = "materialLabel1";
             this.materialLabel1.Size = new System.Drawing.Size(117, 19);
@@ -153,7 +154,7 @@
             // 
             this.NameOfBit.Depth = 0;
             this.NameOfBit.Hint = "";
-            this.NameOfBit.Location = new System.Drawing.Point(601, 78);
+            this.NameOfBit.Location = new System.Drawing.Point(601, 73);
             this.NameOfBit.MouseState = MaterialSkin.MouseState.HOVER;
             this.NameOfBit.Name = "NameOfBit";
             this.NameOfBit.PasswordChar = '\0';
@@ -186,7 +187,7 @@
             // 
             this.DescOfBit.Depth = 0;
             this.DescOfBit.Hint = "";
-            this.DescOfBit.Location = new System.Drawing.Point(601, 107);
+            this.DescOfBit.Location = new System.Drawing.Point(601, 102);
             this.DescOfBit.MouseState = MaterialSkin.MouseState.HOVER;
             this.DescOfBit.Name = "DescOfBit";
             this.DescOfBit.PasswordChar = '\0';
@@ -204,7 +205,7 @@
             this.materialLabel2.Depth = 0;
             this.materialLabel2.Font = new System.Drawing.Font("Roboto", 11F);
             this.materialLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel2.Location = new System.Drawing.Point(478, 107);
+            this.materialLabel2.Location = new System.Drawing.Point(478, 102);
             this.materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel2.Name = "materialLabel2";
             this.materialLabel2.Size = new System.Drawing.Size(79, 19);
@@ -221,12 +222,17 @@
             // 
             this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.button1.ForeColor = System.Drawing.Color.GreenYellow;
+            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button1.ImageIndex = 0;
             this.button1.ImageList = this.imageList2;
-            this.button1.Location = new System.Drawing.Point(482, 136);
+            this.button1.Location = new System.Drawing.Point(482, 129);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(111, 48);
+            this.button1.Size = new System.Drawing.Size(134, 58);
             this.button1.TabIndex = 15;
+            this.button1.Text = "Копировать";
+            this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.button1.UseVisualStyleBackColor = false;
             // 
             // materialRaisedButton1
@@ -250,15 +256,35 @@
             this.listView2.ForeColor = System.Drawing.Color.White;
             this.listView2.LargeImageList = this.imageList1;
             this.listView2.Location = new System.Drawing.Point(229, 109);
+            this.listView2.MultiSelect = false;
             this.listView2.Name = "listView2";
             this.listView2.Size = new System.Drawing.Size(238, 508);
             this.listView2.TabIndex = 18;
             this.listView2.UseCompatibleStateImageBehavior = false;
             this.listView2.View = System.Windows.Forms.View.Tile;
+            this.listView2.SelectedIndexChanged += new System.EventHandler(this.listView2_SelectedIndexChanged);
             // 
             // columnHeader1
             // 
             this.columnHeader1.Width = 113;
+            // 
+            // button2
+            // 
+            this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.button2.ForeColor = System.Drawing.Color.GreenYellow;
+            this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button2.ImageIndex = 0;
+            this.button2.ImageList = this.imageList2;
+            this.button2.Location = new System.Drawing.Point(622, 129);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(134, 58);
+            this.button2.TabIndex = 19;
+            this.button2.Text = "Сохранить";
+            this.button2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // Form1
             // 
@@ -266,6 +292,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1187, 630);
             this.ContextMenuStrip = this.materialContextMenuStrip1;
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.listView2);
             this.Controls.Add(this.materialRaisedButton1);
             this.Controls.Add(this.button1);
@@ -303,6 +330,7 @@
         private System.Windows.Forms.ListView listView2;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.Button button2;
     }
 }
 
