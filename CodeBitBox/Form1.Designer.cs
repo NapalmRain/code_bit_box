@@ -33,20 +33,21 @@
             System.Windows.Forms.ListViewGroup listViewGroup1 = new System.Windows.Forms.ListViewGroup("Языки программирования", System.Windows.Forms.HorizontalAlignment.Left);
             System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
             "PHP",
-            "cds"}, 3);
-            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("C#", 4);
+            "cds"}, 0);
+            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("C#", 1);
             System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("JS", 2);
-            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("HTML", 1);
-            System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem("CSS", 0);
-            System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem("SQL", 3);
-            System.Windows.Forms.ListViewGroup listViewGroup2 = new System.Windows.Forms.ListViewGroup("Языки программирования", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("HTML", 3);
+            System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem("CSS", 4);
+            System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem("SQL", 5);
+            System.Windows.Forms.ListViewItem listViewItem7 = new System.Windows.Forms.ListViewItem(new string[] {
+            "Некий кусочек кода",
+            "Описание этого кусочка кода"}, 0);
             this.materialContextMenuStrip1 = new MaterialSkin.Controls.MaterialContextMenuStrip();
             this.item1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.item2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.listView1 = new System.Windows.Forms.ListView();
-            this.listView2 = new System.Windows.Forms.ListView();
             this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             this.NameOfBit = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.ForCode = new ICSharpCode.TextEditor.TextEditorControl();
@@ -55,6 +56,9 @@
             this.imageList2 = new System.Windows.Forms.ImageList(this.components);
             this.button1 = new System.Windows.Forms.Button();
             this.materialRaisedButton1 = new MaterialSkin.Controls.MaterialRaisedButton();
+            this.listView2 = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.materialContextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -91,15 +95,16 @@
             // 
             this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList1.Images.SetKeyName(0, "css.png");
-            this.imageList1.Images.SetKeyName(1, "html.png");
+            this.imageList1.Images.SetKeyName(0, "php.png");
+            this.imageList1.Images.SetKeyName(1, "csharp.png");
             this.imageList1.Images.SetKeyName(2, "js.png");
-            this.imageList1.Images.SetKeyName(3, "php.png");
-            this.imageList1.Images.SetKeyName(4, "csharp.png");
+            this.imageList1.Images.SetKeyName(3, "html.png");
+            this.imageList1.Images.SetKeyName(4, "css.png");
+            this.imageList1.Images.SetKeyName(5, "SQL.png");
             // 
             // listView1
             // 
-            this.listView1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.listView1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(29)))), ((int)(((byte)(29)))));
             this.listView1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.listView1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.listView1.ForeColor = System.Drawing.Color.White;
@@ -133,27 +138,6 @@
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.List;
             this.listView1.SelectedIndexChanged += new System.EventHandler(this.ListView1_SelectedIndexChanged);
-            // 
-            // listView2
-            // 
-            this.listView2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.listView2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.listView2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.listView2.ForeColor = System.Drawing.Color.White;
-            listViewGroup2.Header = "Языки программирования";
-            listViewGroup2.Name = "listViewGroup1";
-            this.listView2.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
-            listViewGroup2});
-            this.listView2.LabelWrap = false;
-            this.listView2.LargeImageList = this.imageList1;
-            this.listView2.Location = new System.Drawing.Point(224, 107);
-            this.listView2.MultiSelect = false;
-            this.listView2.Name = "listView2";
-            this.listView2.Size = new System.Drawing.Size(243, 511);
-            this.listView2.SmallImageList = this.imageList1;
-            this.listView2.TabIndex = 8;
-            this.listView2.UseCompatibleStateImageBehavior = false;
-            this.listView2.View = System.Windows.Forms.View.List;
             // 
             // materialLabel1
             // 
@@ -260,12 +244,35 @@
             this.materialRaisedButton1.Text = "Добавить кусок";
             this.materialRaisedButton1.UseVisualStyleBackColor = true;
             // 
+            // listView2
+            // 
+            this.listView2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
+            this.listView2.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2});
+            this.listView2.ForeColor = System.Drawing.Color.White;
+            listViewItem7.Tag = "ТЭГ";
+            this.listView2.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            listViewItem7});
+            this.listView2.LargeImageList = this.imageList1;
+            this.listView2.Location = new System.Drawing.Point(229, 109);
+            this.listView2.Name = "listView2";
+            this.listView2.Size = new System.Drawing.Size(238, 508);
+            this.listView2.TabIndex = 18;
+            this.listView2.UseCompatibleStateImageBehavior = false;
+            this.listView2.View = System.Windows.Forms.View.Tile;
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Width = 113;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1187, 630);
             this.ContextMenuStrip = this.materialContextMenuStrip1;
+            this.Controls.Add(this.listView2);
             this.Controls.Add(this.materialRaisedButton1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.DescOfBit);
@@ -273,7 +280,6 @@
             this.Controls.Add(this.ForCode);
             this.Controls.Add(this.NameOfBit);
             this.Controls.Add(this.materialLabel1);
-            this.Controls.Add(this.listView2);
             this.Controls.Add(this.listView1);
             this.Name = "Form1";
             this.Text = "CodeBit BOX - Ящик для кусочков кода...";
@@ -292,7 +298,6 @@
         private System.Windows.Forms.ToolStripMenuItem item2ToolStripMenuItem;
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.ListView listView1;
-        private System.Windows.Forms.ListView listView2;
         private MaterialSkin.Controls.MaterialLabel materialLabel1;
         private MaterialSkin.Controls.MaterialSingleLineTextField NameOfBit;
         private ICSharpCode.TextEditor.TextEditorControl ForCode;
@@ -301,6 +306,9 @@
         private System.Windows.Forms.ImageList imageList2;
         private System.Windows.Forms.Button button1;
         private MaterialSkin.Controls.MaterialRaisedButton materialRaisedButton1;
+        private System.Windows.Forms.ListView listView2;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
     }
 }
 
