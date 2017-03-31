@@ -19,7 +19,7 @@ namespace CodeBitBox
     public partial class Form1 : MaterialForm
     {
         int ActiveLang = 0;
-        string ActiveBit = '0';
+        string ActiveBit = "0";
         string baseName = "codebit.sqlite";
         SQLiteConnection connection;
 
@@ -71,50 +71,59 @@ namespace CodeBitBox
 
         
         private void ListView1_SelectedIndexChanged(object sender, EventArgs e) {
-            ActiveLang = listView1.SelectedIndices[0];
-            switch (ActiveLang) {
-                case 0:
-                    ForCode.SetHighlighting("PHP");
-                    break;
-                case 1:
-                    ForCode.SetHighlighting("C#");
-                    break;
-                case 2:
-                    ForCode.SetHighlighting("JS");
-                    break;
-                case 3:
-                    ForCode.SetHighlighting("HTML");
-                    break;
-                case 4:
-                    ForCode.SetHighlighting("CSS");
-                    break;
-                case 5:
-                    ForCode.SetHighlighting("SQL");
-                    break;
+            if (listView1.SelectedIndices.Count > 0)
+            {
+                ActiveLang = listView1.SelectedIndices[0];
+                switch (ActiveLang)
+                {
+                    case 0:
+                        ForCode.SetHighlighting("PHP");
+                        break;
+                    case 1:
+                        ForCode.SetHighlighting("C#");
+                        break;
+                    case 2:
+                        ForCode.SetHighlighting("JS");
+                        break;
+                    case 3:
+                        ForCode.SetHighlighting("HTML");
+                        break;
+                    case 4:
+                        ForCode.SetHighlighting("CSS");
+                        break;
+                    case 5:
+                        ForCode.SetHighlighting("SQL");
+                        break;
+                }
             }
+                
         }
 
         private void listView2_SelectedIndexChanged(object sender, EventArgs e) {
-            ActiveBit = listView2.Items[listView2.SelectedIndices[0]].SubItems[2].Text;
-            connection.Open();
-            SQLiteCommand command = new SQLiteCommand("SELECT `Syntax`, `Name`, `Description` FROM `UserBits` WHERE `id` = '" + ActiveBit + "';", connection);
-            SQLiteDataReader CodeBits = command.ExecuteReader();
+            if (listView2.SelectedIndices.Count>0) {
+                ActiveBit = listView2.Items[listView2.SelectedIndices[0]].SubItems[2].Text;
+                connection.Open();
+                SQLiteCommand command = new SQLiteCommand("SELECT `Syntax`, `Name`, `Description` FROM `UserBits` WHERE `id` = '" + ActiveBit + "';", connection);
+                SQLiteDataReader CodeBits = command.ExecuteReader();
 
-            while (CodeBits.Read())
-            {
-                NameOfBit.Text = CodeBits.GetString(1);
-                DescOfBit.Text = CodeBits.GetString(2);
-                ForCode.Text = CodeBits.GetString(0);
+                while (CodeBits.Read())
+                {
+                    NameOfBit.Text = CodeBits.GetString(1);
+                    DescOfBit.Text = CodeBits.GetString(2);
+                    ForCode.Text = CodeBits.GetString(0);
+                }
+                connection.Close();
             }
-            connection.Close();
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            connection.Open();
-            SQLiteCommand command = new SQLiteCommand("UPDATE `UserBits` SET `Name` = '"+NameOfBit.Text+"' WHERE `id` = '" + ActiveBit + "';", connection);
-                        
-            connection.Close();
+        private void button2_Click(object sender, EventArgs e) {
+            if (ActiveBit!="0") {
+
+                connection.Open();
+                SQLiteCommand command = new SQLiteCommand("UPDATE `UserBits` SET `Name` = '" + NameOfBit.Text + "', `Description` = '"+DescOfBit.Text+"', `Syntax` = '"+ForCode.Text+"' WHERE `id` = '" + ActiveBit + "';", connection);
+                command.ExecuteNonQuery();
+                connection.Close();
+            }
         }
     }
 }

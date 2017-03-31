@@ -255,7 +255,7 @@
             this.columnHeader2});
             this.listView2.ForeColor = System.Drawing.Color.White;
             this.listView2.LargeImageList = this.imageList1;
-            this.listView2.Location = new System.Drawing.Point(229, 109);
+            this.listView2.Location = new System.Drawing.Point(229, 107);
             this.listView2.MultiSelect = false;
             this.listView2.Name = "listView2";
             this.listView2.Size = new System.Drawing.Size(238, 508);
