@@ -126,6 +126,13 @@ namespace CodeBitBox
                 DescOfBit.Text = listView2.Items[listView2.SelectedIndices[0]].SubItems[1].Text;
                 ForCode.Text = listView2.Items[listView2.SelectedIndices[0]].SubItems[3].Text;
                 ForCode.Refresh();
+            } else {
+                ActiveBitIndex = -1;
+                ActiveBit = "-1";
+                NameOfBit.Text = "...";
+                DescOfBit.Text = "...";
+                ForCode.Text = "";
+                ForCode.Refresh();
             }
         }
 
@@ -191,27 +198,38 @@ namespace CodeBitBox
         {
             if (ActiveBitIndex >= 0)
             {
-                connection.Open();
-                SQLiteCommand command = new SQLiteCommand("DELETE FROM `UserBits` WHERE `id` = '" + ActiveBit + "';", connection);
-                command.ExecuteNonQuery();
-                connection.Close();
+                string message = "It will not be possible to cancel this operation.\nAre you sure you want to do this ?";
+                string caption = "WARNING";
+                MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+                DialogResult result;
+                result = MessageBox.Show(message, caption, buttons);
 
-                listView2.Items.Clear();
-                connection.Open();
-                command = new SQLiteCommand("SELECT `id`, `Name`, `Description`, `Language`, `Syntax` FROM `UserBits` WHERE `Language` = '" + ActiveLang.ToString() + "';", connection);
-                SQLiteDataReader CodeBits = command.ExecuteReader();
-
-                while (CodeBits.Read())
+                if (result == DialogResult.Yes)
                 {
-                    ListViewItem lvi;
-                    lvi = listView2.Items.Add(CodeBits.GetString(1), CodeBits.GetInt16(0));
-                    lvi.ImageIndex = CodeBits.GetInt16(3);
-                    lvi.SubItems.Add(CodeBits.GetString(2));
-                    lvi.SubItems.Add(CodeBits.GetInt16(0).ToString());
-                    lvi.SubItems.Add(CodeBits.GetString(4));
+                    connection.Open();
+                    SQLiteCommand command = new SQLiteCommand("DELETE FROM `UserBits` WHERE `id` = '" + ActiveBit + "';", connection);
+                    command.ExecuteNonQuery();
+                    connection.Close();
 
+                    listView2.Items.Clear();
+                    connection.Open();
+                    command = new SQLiteCommand("SELECT `id`, `Name`, `Description`, `Language`, `Syntax` FROM `UserBits` WHERE `Language` = '" + ActiveLang.ToString() + "';", connection);
+                    SQLiteDataReader CodeBits = command.ExecuteReader();
+
+                    while (CodeBits.Read())
+                    {
+                        ListViewItem lvi;
+                        lvi = listView2.Items.Add(CodeBits.GetString(1), CodeBits.GetInt16(0));
+                        lvi.ImageIndex = CodeBits.GetInt16(3);
+                        lvi.SubItems.Add(CodeBits.GetString(2));
+                        lvi.SubItems.Add(CodeBits.GetInt16(0).ToString());
+                        lvi.SubItems.Add(CodeBits.GetString(4));
+
+                    }
+                    connection.Close();
+                    ActiveBitIndex = -1;
+                    ActiveBit = "-1";
                 }
-                connection.Close();
             }
         }
 

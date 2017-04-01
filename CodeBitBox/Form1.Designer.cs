@@ -56,6 +56,7 @@
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.button2 = new System.Windows.Forms.Button();
+            this.DeleteButton = new System.Windows.Forms.Button();
             this.materialContextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -68,7 +69,7 @@
             this.item2ToolStripMenuItem});
             this.materialContextMenuStrip1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialContextMenuStrip1.Name = "materialContextMenuStrip1";
-            this.materialContextMenuStrip1.Size = new System.Drawing.Size(154, 70);
+            this.materialContextMenuStrip1.Size = new System.Drawing.Size(154, 48);
             // 
             // item1ToolStripMenuItem
             // 
@@ -141,9 +142,9 @@
             this.materialLabel1.Location = new System.Drawing.Point(478, 73);
             this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel1.Name = "materialLabel1";
-            this.materialLabel1.Size = new System.Drawing.Size(117, 19);
+            this.materialLabel1.Size = new System.Drawing.Size(49, 19);
             this.materialLabel1.TabIndex = 9;
-            this.materialLabel1.Text = "Наименование";
+            this.materialLabel1.Text = "Name";
             // 
             // NameOfBit
             // 
@@ -209,9 +210,9 @@
             this.materialLabel2.Location = new System.Drawing.Point(478, 102);
             this.materialLabel2.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel2.Name = "materialLabel2";
-            this.materialLabel2.Size = new System.Drawing.Size(79, 19);
+            this.materialLabel2.Size = new System.Drawing.Size(86, 19);
             this.materialLabel2.TabIndex = 12;
-            this.materialLabel2.Text = "Описание";
+            this.materialLabel2.Text = "Description";
             // 
             // imageList2
             // 
@@ -219,6 +220,7 @@
             this.imageList2.TransparentColor = System.Drawing.Color.Transparent;
             this.imageList2.Images.SetKeyName(0, "Editing-Copy-icon.png");
             this.imageList2.Images.SetKeyName(1, "save.png");
+            this.imageList2.Images.SetKeyName(2, "delete.png");
             // 
             // button1
             // 
@@ -231,9 +233,9 @@
             this.button1.ImageList = this.imageList2;
             this.button1.Location = new System.Drawing.Point(482, 129);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(134, 58);
+            this.button1.Size = new System.Drawing.Size(98, 58);
             this.button1.TabIndex = 15;
-            this.button1.Text = "Копировать";
+            this.button1.Text = "Copy";
             this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.button1.UseVisualStyleBackColor = false;
             // 
@@ -246,7 +248,7 @@
             this.materialRaisedButton1.Primary = true;
             this.materialRaisedButton1.Size = new System.Drawing.Size(238, 38);
             this.materialRaisedButton1.TabIndex = 17;
-            this.materialRaisedButton1.Text = "Добавить кусок";
+            this.materialRaisedButton1.Text = "Add new Bit";
             this.materialRaisedButton1.UseVisualStyleBackColor = true;
             this.materialRaisedButton1.Click += new System.EventHandler(this.materialRaisedButton1_Click);
             // 
@@ -281,20 +283,39 @@
             this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button2.ImageIndex = 1;
             this.button2.ImageList = this.imageList2;
-            this.button2.Location = new System.Drawing.Point(622, 129);
+            this.button2.Location = new System.Drawing.Point(586, 129);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(134, 58);
+            this.button2.Size = new System.Drawing.Size(102, 58);
             this.button2.TabIndex = 19;
-            this.button2.Text = "Сохранить";
+            this.button2.Text = "Save";
             this.button2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // DeleteButton
+            // 
+            this.DeleteButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.DeleteButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.DeleteButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.DeleteButton.ForeColor = System.Drawing.Color.LightCoral;
+            this.DeleteButton.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.DeleteButton.ImageIndex = 2;
+            this.DeleteButton.ImageList = this.imageList2;
+            this.DeleteButton.Location = new System.Drawing.Point(1069, 129);
+            this.DeleteButton.Name = "DeleteButton";
+            this.DeleteButton.Size = new System.Drawing.Size(106, 58);
+            this.DeleteButton.TabIndex = 20;
+            this.DeleteButton.Text = "Delete";
+            this.DeleteButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.DeleteButton.UseVisualStyleBackColor = false;
+            this.DeleteButton.Click += new System.EventHandler(this.item2ToolStripMenuItem_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1187, 630);
+            this.Controls.Add(this.DeleteButton);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.listView2);
             this.Controls.Add(this.materialRaisedButton1);
@@ -305,8 +326,9 @@
             this.Controls.Add(this.NameOfBit);
             this.Controls.Add(this.materialLabel1);
             this.Controls.Add(this.listView1);
+            this.MinimumSize = new System.Drawing.Size(800, 400);
             this.Name = "Form1";
-            this.Text = "CodeBit BOX - Ящик для кусочков кода...";
+            this.Text = "CodeBit BOX - Casket with important bits of code";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Resize += new System.EventHandler(this.Form1_Resize);
             this.materialContextMenuStrip1.ResumeLayout(false);
@@ -333,6 +355,7 @@
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button DeleteButton;
     }
 }
 
