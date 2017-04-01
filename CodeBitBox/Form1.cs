@@ -68,10 +68,18 @@ namespace CodeBitBox
             ForCode.Width = this.Width - 494;
             NameOfBit.Width = this.Width - 613;
             DescOfBit.Width = this.Width - 613;
+            DeleteButton.Left = this.Width - 118;
         }
 
         
         private void ListView1_SelectedIndexChanged(object sender, EventArgs e) {
+            ForCode.Text = "";
+            ForCode.Refresh();
+            NameOfBit.Text = "...";
+            DescOfBit.Text = "...";
+            ActiveBit = "-1";
+            ActiveBitIndex = -1;
+
             if (listView1.SelectedIndices.Count > 0)
             {
                 ActiveLang = listView1.SelectedIndices[0];
@@ -231,6 +239,11 @@ namespace CodeBitBox
                     ActiveBit = "-1";
                 }
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetText(ForCode.Text);
         }
 
         private void button2_Click(object sender, EventArgs e) {
