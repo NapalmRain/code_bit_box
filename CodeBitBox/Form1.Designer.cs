@@ -30,15 +30,15 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            System.Windows.Forms.ListViewGroup listViewGroup1 = new System.Windows.Forms.ListViewGroup("Языки программирования", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewGroup listViewGroup2 = new System.Windows.Forms.ListViewGroup("Языки программирования", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewItem listViewItem7 = new System.Windows.Forms.ListViewItem(new string[] {
             "PHP",
             "cds"}, 0);
-            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("C#", 1);
-            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("JS", 2);
-            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("HTML", 3);
-            System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem("CSS", 4);
-            System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem("SQL", 5);
+            System.Windows.Forms.ListViewItem listViewItem8 = new System.Windows.Forms.ListViewItem("C#", 1);
+            System.Windows.Forms.ListViewItem listViewItem9 = new System.Windows.Forms.ListViewItem("JS", 2);
+            System.Windows.Forms.ListViewItem listViewItem10 = new System.Windows.Forms.ListViewItem("HTML", 3);
+            System.Windows.Forms.ListViewItem listViewItem11 = new System.Windows.Forms.ListViewItem("CSS", 4);
+            System.Windows.Forms.ListViewItem listViewItem12 = new System.Windows.Forms.ListViewItem("SQL", 5);
             this.materialContextMenuStrip1 = new MaterialSkin.Controls.MaterialContextMenuStrip();
             this.item1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.item2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -46,7 +46,6 @@
             this.listView1 = new System.Windows.Forms.ListView();
             this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
             this.NameOfBit = new MaterialSkin.Controls.MaterialSingleLineTextField();
-            this.ForCode = new ICSharpCode.TextEditor.TextEditorControl();
             this.DescOfBit = new MaterialSkin.Controls.MaterialSingleLineTextField();
             this.materialLabel2 = new MaterialSkin.Controls.MaterialLabel();
             this.imageList2 = new System.Windows.Forms.ImageList(this.components);
@@ -57,6 +56,7 @@
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.button2 = new System.Windows.Forms.Button();
             this.DeleteButton = new System.Windows.Forms.Button();
+            this.ForCode = new ICSharpCode.TextEditor.TextEditorControl();
             this.materialContextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -102,25 +102,25 @@
             this.listView1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.listView1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.listView1.ForeColor = System.Drawing.Color.White;
-            listViewGroup1.Header = "Языки программирования";
-            listViewGroup1.Name = "listViewGroup1";
+            listViewGroup2.Header = "Языки программирования";
+            listViewGroup2.Name = "listViewGroup1";
             this.listView1.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
-            listViewGroup1});
-            listViewItem1.Checked = true;
-            listViewItem1.Group = listViewGroup1;
-            listViewItem1.StateImageIndex = 1;
-            listViewItem2.Group = listViewGroup1;
-            listViewItem2.StateImageIndex = 0;
-            listViewItem3.Group = listViewGroup1;
-            listViewItem4.Group = listViewGroup1;
-            listViewItem5.Group = listViewGroup1;
+            listViewGroup2});
+            listViewItem7.Checked = true;
+            listViewItem7.Group = listViewGroup2;
+            listViewItem7.StateImageIndex = 1;
+            listViewItem8.Group = listViewGroup2;
+            listViewItem8.StateImageIndex = 0;
+            listViewItem9.Group = listViewGroup2;
+            listViewItem10.Group = listViewGroup2;
+            listViewItem11.Group = listViewGroup2;
             this.listView1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1,
-            listViewItem2,
-            listViewItem3,
-            listViewItem4,
-            listViewItem5,
-            listViewItem6});
+            listViewItem7,
+            listViewItem8,
+            listViewItem9,
+            listViewItem10,
+            listViewItem11,
+            listViewItem12});
             this.listView1.LabelWrap = false;
             this.listView1.LargeImageList = this.imageList1;
             this.listView1.Location = new System.Drawing.Point(1, 107);
@@ -128,7 +128,7 @@
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(222, 511);
             this.listView1.SmallImageList = this.imageList1;
-            this.listView1.TabIndex = 7;
+            this.listView1.TabIndex = 1;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.List;
             this.listView1.SelectedIndexChanged += new System.EventHandler(this.ListView1_SelectedIndexChanged);
@@ -143,7 +143,7 @@
             this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialLabel1.Name = "materialLabel1";
             this.materialLabel1.Size = new System.Drawing.Size(49, 19);
-            this.materialLabel1.TabIndex = 9;
+            this.materialLabel1.TabIndex = 19;
             this.materialLabel1.Text = "Name";
             // 
             // NameOfBit
@@ -158,31 +158,11 @@
             this.NameOfBit.SelectionLength = 0;
             this.NameOfBit.SelectionStart = 0;
             this.NameOfBit.Size = new System.Drawing.Size(574, 23);
-            this.NameOfBit.TabIndex = 10;
+            this.NameOfBit.TabIndex = 4;
             this.NameOfBit.Text = "...";
             this.NameOfBit.UseSystemPasswordChar = false;
             this.NameOfBit.Enter += new System.EventHandler(this.NameOfBit_Enter);
             this.NameOfBit.KeyUp += new System.Windows.Forms.KeyEventHandler(this.NameOfBit_KeyUp);
-            // 
-            // ForCode
-            // 
-            this.ForCode.AutoScroll = true;
-            this.ForCode.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ForCode.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
-            this.ForCode.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.ForCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.ForCode.ForeColor = System.Drawing.Color.White;
-            this.ForCode.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.ForCode.IsReadOnly = false;
-            this.ForCode.Location = new System.Drawing.Point(482, 190);
-            this.ForCode.Name = "ForCode";
-            this.ForCode.ShowSpaces = true;
-            this.ForCode.ShowTabs = true;
-            this.ForCode.Size = new System.Drawing.Size(693, 428);
-            this.ForCode.TabIndex = 11;
-            this.ForCode.TextChanged += new System.EventHandler(this.ForCode_TextChanged);
-            this.ForCode.DockChanged += new System.EventHandler(this.ForCode_DockChanged);
-            this.ForCode.Enter += new System.EventHandler(this.ForCode_Enter);
             // 
             // DescOfBit
             // 
@@ -196,7 +176,7 @@
             this.DescOfBit.SelectionLength = 0;
             this.DescOfBit.SelectionStart = 0;
             this.DescOfBit.Size = new System.Drawing.Size(574, 23);
-            this.DescOfBit.TabIndex = 13;
+            this.DescOfBit.TabIndex = 5;
             this.DescOfBit.Text = "...";
             this.DescOfBit.UseSystemPasswordChar = false;
             this.DescOfBit.KeyUp += new System.Windows.Forms.KeyEventHandler(this.DescOfBit_KeyUp);
@@ -234,7 +214,7 @@
             this.button1.Location = new System.Drawing.Point(482, 129);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(98, 58);
-            this.button1.TabIndex = 15;
+            this.button1.TabIndex = 6;
             this.button1.Text = "Copy";
             this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.button1.UseVisualStyleBackColor = false;
@@ -248,7 +228,7 @@
             this.materialRaisedButton1.Name = "materialRaisedButton1";
             this.materialRaisedButton1.Primary = true;
             this.materialRaisedButton1.Size = new System.Drawing.Size(238, 38);
-            this.materialRaisedButton1.TabIndex = 17;
+            this.materialRaisedButton1.TabIndex = 2;
             this.materialRaisedButton1.Text = "Add new Bit";
             this.materialRaisedButton1.UseVisualStyleBackColor = true;
             this.materialRaisedButton1.Click += new System.EventHandler(this.materialRaisedButton1_Click);
@@ -266,7 +246,7 @@
             this.listView2.MultiSelect = false;
             this.listView2.Name = "listView2";
             this.listView2.Size = new System.Drawing.Size(238, 511);
-            this.listView2.TabIndex = 18;
+            this.listView2.TabIndex = 3;
             this.listView2.UseCompatibleStateImageBehavior = false;
             this.listView2.View = System.Windows.Forms.View.Tile;
             this.listView2.SelectedIndexChanged += new System.EventHandler(this.listView2_SelectedIndexChanged);
@@ -287,7 +267,7 @@
             this.button2.Location = new System.Drawing.Point(586, 129);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(102, 58);
-            this.button2.TabIndex = 19;
+            this.button2.TabIndex = 7;
             this.button2.Text = "Save";
             this.button2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.button2.UseVisualStyleBackColor = false;
@@ -305,17 +285,33 @@
             this.DeleteButton.Location = new System.Drawing.Point(1069, 129);
             this.DeleteButton.Name = "DeleteButton";
             this.DeleteButton.Size = new System.Drawing.Size(106, 58);
-            this.DeleteButton.TabIndex = 20;
+            this.DeleteButton.TabIndex = 9;
             this.DeleteButton.Text = "Delete";
             this.DeleteButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.DeleteButton.UseVisualStyleBackColor = false;
             this.DeleteButton.Click += new System.EventHandler(this.item2ToolStripMenuItem_Click);
+            // 
+            // ForCode
+            // 
+            this.ForCode.AutoScroll = true;
+            this.ForCode.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.ForCode.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("ForCode.BackgroundImage")));
+            this.ForCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ForCode.ForeColor = System.Drawing.Color.White;
+            this.ForCode.IsReadOnly = false;
+            this.ForCode.Location = new System.Drawing.Point(482, 190);
+            this.ForCode.Name = "ForCode";
+            this.ForCode.ShowSpaces = true;
+            this.ForCode.ShowTabs = true;
+            this.ForCode.Size = new System.Drawing.Size(693, 428);
+            this.ForCode.TabIndex = 8;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1187, 630);
+            this.Controls.Add(this.ForCode);
             this.Controls.Add(this.DeleteButton);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.listView2);
@@ -323,7 +319,6 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.DescOfBit);
             this.Controls.Add(this.materialLabel2);
-            this.Controls.Add(this.ForCode);
             this.Controls.Add(this.NameOfBit);
             this.Controls.Add(this.materialLabel1);
             this.Controls.Add(this.listView1);
@@ -346,7 +341,6 @@
         private System.Windows.Forms.ListView listView1;
         private MaterialSkin.Controls.MaterialLabel materialLabel1;
         private MaterialSkin.Controls.MaterialSingleLineTextField NameOfBit;
-        private ICSharpCode.TextEditor.TextEditorControl ForCode;
         private MaterialSkin.Controls.MaterialSingleLineTextField DescOfBit;
         private MaterialSkin.Controls.MaterialLabel materialLabel2;
         private System.Windows.Forms.ImageList imageList2;
@@ -357,6 +351,7 @@
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button DeleteButton;
+        private ICSharpCode.TextEditor.TextEditorControl ForCode;
     }
 }
 
