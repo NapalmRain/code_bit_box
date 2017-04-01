@@ -18,7 +18,7 @@ namespace CodeBitBox
 {
     public partial class Form1 : MaterialForm
     {
-        int ActiveLang = 0;
+        int ActiveLang = 0, ActiveBitIndex = -1;
         string ActiveBit = "0";
         string baseName = "codebit.sqlite";
         SQLiteConnection connection;
@@ -74,6 +74,8 @@ namespace CodeBitBox
             if (listView1.SelectedIndices.Count > 0)
             {
                 ActiveLang = listView1.SelectedIndices[0];
+                ActiveBitIndex = -1;
+                listView2.Items.Clear();
                 switch (ActiveLang)
                 {
                     case 0:
@@ -95,12 +97,27 @@ namespace CodeBitBox
                         ForCode.SetHighlighting("SQL");
                         break;
                 }
+                connection.Open();
+                SQLiteCommand command = new SQLiteCommand("SELECT `id`, `Name`, `Description`, `Language` FROM `UserBits` WHERE `Language` = '" + ActiveLang.ToString() + "';", connection);
+                SQLiteDataReader CodeBits = command.ExecuteReader();
+
+                while (CodeBits.Read())
+                {
+                    ListViewItem lvi;
+                    lvi = listView2.Items.Add(CodeBits.GetString(1), CodeBits.GetInt16(0));
+                    lvi.ImageIndex = CodeBits.GetInt16(3);
+                    lvi.SubItems.Add(CodeBits.GetString(2));
+                    lvi.SubItems.Add(CodeBits.GetInt16(0).ToString());
+
+                }
+                connection.Close();
             }
                 
         }
 
         private void listView2_SelectedIndexChanged(object sender, EventArgs e) {
             if (listView2.SelectedIndices.Count>0) {
+                ActiveBitIndex = listView2.SelectedIndices[0];
                 ActiveBit = listView2.Items[listView2.SelectedIndices[0]].SubItems[2].Text;
                 connection.Open();
                 SQLiteCommand command = new SQLiteCommand("SELECT `Syntax`, `Name`, `Description` FROM `UserBits` WHERE `id` = '" + ActiveBit + "';", connection);
@@ -113,6 +130,30 @@ namespace CodeBitBox
                     ForCode.Text = CodeBits.GetString(0);
                 }
                 connection.Close();
+            }
+        }
+
+        private void NameOfBit_Enter(object sender, EventArgs e)
+        {
+            if (ActiveBitIndex>=0)
+            {
+                listView2.Items[ActiveBitIndex].Text = NameOfBit.Text;
+            }
+        }
+
+        private void NameOfBit_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (ActiveBitIndex >= 0)
+            {
+                listView2.Items[ActiveBitIndex].Text = NameOfBit.Text;
+            }
+        }
+
+        private void DescOfBit_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (ActiveBitIndex >= 0)
+            {
+                listView2.Items[ActiveBitIndex].SubItems[1].Text = DescOfBit.Text;
             }
         }
 

@@ -30,15 +30,15 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            System.Windows.Forms.ListViewGroup listViewGroup1 = new System.Windows.Forms.ListViewGroup("Языки программирования", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewGroup listViewGroup2 = new System.Windows.Forms.ListViewGroup("Языки программирования", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewItem listViewItem7 = new System.Windows.Forms.ListViewItem(new string[] {
             "PHP",
             "cds"}, 0);
-            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("C#", 1);
-            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("JS", 2);
-            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("HTML", 3);
-            System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem("CSS", 4);
-            System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem("SQL", 5);
+            System.Windows.Forms.ListViewItem listViewItem8 = new System.Windows.Forms.ListViewItem("C#", 1);
+            System.Windows.Forms.ListViewItem listViewItem9 = new System.Windows.Forms.ListViewItem("JS", 2);
+            System.Windows.Forms.ListViewItem listViewItem10 = new System.Windows.Forms.ListViewItem("HTML", 3);
+            System.Windows.Forms.ListViewItem listViewItem11 = new System.Windows.Forms.ListViewItem("CSS", 4);
+            System.Windows.Forms.ListViewItem listViewItem12 = new System.Windows.Forms.ListViewItem("SQL", 5);
             this.materialContextMenuStrip1 = new MaterialSkin.Controls.MaterialContextMenuStrip();
             this.item1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
@@ -106,25 +106,25 @@
             this.listView1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.listView1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.listView1.ForeColor = System.Drawing.Color.White;
-            listViewGroup1.Header = "Языки программирования";
-            listViewGroup1.Name = "listViewGroup1";
+            listViewGroup2.Header = "Языки программирования";
+            listViewGroup2.Name = "listViewGroup1";
             this.listView1.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
-            listViewGroup1});
-            listViewItem1.Checked = true;
-            listViewItem1.Group = listViewGroup1;
-            listViewItem1.StateImageIndex = 1;
-            listViewItem2.Group = listViewGroup1;
-            listViewItem2.StateImageIndex = 0;
-            listViewItem3.Group = listViewGroup1;
-            listViewItem4.Group = listViewGroup1;
-            listViewItem5.Group = listViewGroup1;
+            listViewGroup2});
+            listViewItem7.Checked = true;
+            listViewItem7.Group = listViewGroup2;
+            listViewItem7.StateImageIndex = 1;
+            listViewItem8.Group = listViewGroup2;
+            listViewItem8.StateImageIndex = 0;
+            listViewItem9.Group = listViewGroup2;
+            listViewItem10.Group = listViewGroup2;
+            listViewItem11.Group = listViewGroup2;
             this.listView1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1,
-            listViewItem2,
-            listViewItem3,
-            listViewItem4,
-            listViewItem5,
-            listViewItem6});
+            listViewItem7,
+            listViewItem8,
+            listViewItem9,
+            listViewItem10,
+            listViewItem11,
+            listViewItem12});
             this.listView1.LabelWrap = false;
             this.listView1.LargeImageList = this.imageList1;
             this.listView1.Location = new System.Drawing.Point(1, 107);
@@ -165,6 +165,8 @@
             this.NameOfBit.TabIndex = 10;
             this.NameOfBit.Text = "...";
             this.NameOfBit.UseSystemPasswordChar = false;
+            this.NameOfBit.Enter += new System.EventHandler(this.NameOfBit_Enter);
+            this.NameOfBit.KeyUp += new System.Windows.Forms.KeyEventHandler(this.NameOfBit_KeyUp);
             // 
             // ForCode
             // 
@@ -198,6 +200,7 @@
             this.DescOfBit.TabIndex = 13;
             this.DescOfBit.Text = "...";
             this.DescOfBit.UseSystemPasswordChar = false;
+            this.DescOfBit.KeyUp += new System.Windows.Forms.KeyEventHandler(this.DescOfBit_KeyUp);
             // 
             // materialLabel2
             // 
@@ -217,13 +220,14 @@
             this.imageList2.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList2.ImageStream")));
             this.imageList2.TransparentColor = System.Drawing.Color.Transparent;
             this.imageList2.Images.SetKeyName(0, "Editing-Copy-icon.png");
+            this.imageList2.Images.SetKeyName(1, "save.png");
             // 
             // button1
             // 
             this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button1.ForeColor = System.Drawing.Color.GreenYellow;
+            this.button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(213)))), ((int)(((byte)(218)))));
             this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button1.ImageIndex = 0;
             this.button1.ImageList = this.imageList2;
@@ -238,11 +242,11 @@
             // materialRaisedButton1
             // 
             this.materialRaisedButton1.Depth = 0;
-            this.materialRaisedButton1.Location = new System.Drawing.Point(224, 66);
+            this.materialRaisedButton1.Location = new System.Drawing.Point(229, 66);
             this.materialRaisedButton1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialRaisedButton1.Name = "materialRaisedButton1";
             this.materialRaisedButton1.Primary = true;
-            this.materialRaisedButton1.Size = new System.Drawing.Size(243, 38);
+            this.materialRaisedButton1.Size = new System.Drawing.Size(238, 38);
             this.materialRaisedButton1.TabIndex = 17;
             this.materialRaisedButton1.Text = "Добавить кусок";
             this.materialRaisedButton1.UseVisualStyleBackColor = true;
@@ -258,7 +262,7 @@
             this.listView2.Location = new System.Drawing.Point(229, 107);
             this.listView2.MultiSelect = false;
             this.listView2.Name = "listView2";
-            this.listView2.Size = new System.Drawing.Size(238, 508);
+            this.listView2.Size = new System.Drawing.Size(238, 511);
             this.listView2.TabIndex = 18;
             this.listView2.UseCompatibleStateImageBehavior = false;
             this.listView2.View = System.Windows.Forms.View.Tile;
@@ -273,9 +277,9 @@
             this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button2.ForeColor = System.Drawing.Color.GreenYellow;
+            this.button2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(73)))), ((int)(((byte)(213)))), ((int)(((byte)(218)))));
             this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button2.ImageIndex = 0;
+            this.button2.ImageIndex = 1;
             this.button2.ImageList = this.imageList2;
             this.button2.Location = new System.Drawing.Point(622, 129);
             this.button2.Name = "button2";
