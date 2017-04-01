@@ -18,7 +18,7 @@ namespace CodeBitBox
 {
     public partial class Form1 : MaterialForm
     {
-        int ActiveLang = 0, ActiveBitIndex = -1;
+        int ActiveLang = 0, ActiveBitIndex = -1, ActiveUser = 0;
         string ActiveBit = "-1";
         string baseName = "codebit.sqlite";
         SQLiteConnection connection;
@@ -26,8 +26,12 @@ namespace CodeBitBox
         private void UpdateAllElements(int ID = -1) {
             listView2.Items.Clear();
 
-            connection.Open();
-            SQLiteCommand command = new SQLiteCommand("SELECT `id`, `Name`, `Description`, `Language`, `Syntax` FROM `UserBits` WHERE `Language` = '" + ActiveLang.ToString() + "';", connection);
+            SQLiteCommand command = new SQLiteCommand("SELECT `id`, `Name`, `Description`, `Language`, `Syntax` FROM `UserBits` WHERE `Language` = @ID AND `UserID` = @USERID", connection);
+            command.Parameters.Add("@ID", DbType.Int16);
+            command.Parameters["@ID"].Value = ActiveLang;
+            command.Parameters.Add("@USERID", DbType.Int16);
+            command.Parameters["@USERID"].Value = ActiveUser;
+
             SQLiteDataReader CodeBits = command.ExecuteReader();
 
             while (CodeBits.Read())
@@ -40,7 +44,7 @@ namespace CodeBitBox
                 lvi.SubItems.Add(CodeBits.GetString(4));
 
             }
-            connection.Close();
+            
             ForCode.Text = "";
             ForCode.Refresh();
             NameOfBit.Text = "";
@@ -59,13 +63,38 @@ namespace CodeBitBox
             InitializeComponent();
 
             connection = new SQLiteConnection(string.Format("Data Source={0};", baseName));
-            UpdateAllElements();
-
+            
             var materialSkinManager = MaterialSkinManager.Instance;
             materialSkinManager.AddFormToManage(this);
             materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
             materialSkinManager.ColorScheme = new ColorScheme(Primary.Cyan900, Primary.BlueGrey900, Primary.DeepOrange400, Accent.LightBlue200, TextShade.WHITE);
             materialSkinManager.Theme = MaterialSkinManager.Themes.DARK;
+
+            connection.Open();
+            SQLiteCommand command = new SQLiteCommand("SELECT COUNT(*) FROM `Users`", connection);
+            SQLiteDataReader CodeBits = command.ExecuteReader();
+
+            if (CodeBits.Read())
+            {
+                int count = CodeBits.GetInt16(0);
+                
+                if (count==0)
+                {
+                    command = new SQLiteCommand("INSERT INTO `Users` (`BaseID`, `Name`, `Key`, `Active`) VALUES ('0', 'Default', ' ', '1');", connection);
+                    command.ExecuteNonQuery(); 
+                }
+                
+                command = new SQLiteCommand("SELECT `LocalID` FROM `Users` WHERE `Active` = 1;", connection);
+                CodeBits = command.ExecuteReader();
+                if (CodeBits.Read())
+                {
+                    ActiveUser = CodeBits.GetInt16(0);
+                }
+                
+            }
+
+            UpdateAllElements();
+
         }
 
         private void Form1_Load(object sender, EventArgs e) {
@@ -75,7 +104,7 @@ namespace CodeBitBox
 
                 fsmp = new FileSyntaxModeProvider(dirc);
                 HighlightingManager.Manager.AddSyntaxModeFileProvider(fsmp);
-                ForCode.SetHighlighting("SQL");
+                ForCode.SetHighlighting("PHP");
             }
         }
 
@@ -218,14 +247,19 @@ namespace CodeBitBox
 
                 if (result == DialogResult.Yes)
                 {
-                    connection.Open();
-                    SQLiteCommand command = new SQLiteCommand("DELETE FROM `UserBits` WHERE `id` = '" + ActiveBit + "';", connection);
+                    SQLiteCommand command = new SQLiteCommand("DELETE FROM `UserBits` WHERE `id` = @ID;", connection);
+                    command.Parameters.Add("@ID", DbType.Int16);
+                    command.Parameters["@ID"].Value = ActiveBit;
                     command.ExecuteNonQuery();
-                    connection.Close();
 
                     UpdateAllElements();
                 }
             }
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            connection.Close();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -236,7 +270,6 @@ namespace CodeBitBox
         private void button2_Click(object sender, EventArgs e) {
             SQLiteCommand command;
             if (ActiveBit!="-1") {
-                connection.Open();
                 command = new SQLiteCommand("UPDATE `UserBits` SET `Name` = @NAME, `Description` = @DESCRIPTION, `Syntax` = @SYNTAX WHERE `id` = @ID;", connection);
                 command.Parameters.Add("@ID", DbType.Int16);
                 command.Parameters["@ID"].Value = ActiveBit;
@@ -244,17 +277,16 @@ namespace CodeBitBox
                 command.Parameters.AddWithValue("@DESCRIPTION", DescOfBit.Text);
                 command.Parameters.AddWithValue("@SYNTAX", ForCode.Text);
                 command.ExecuteNonQuery();
-                connection.Close();
             } else {
-                connection.Open();
-                command = new SQLiteCommand("INSERT INTO `UserBits` (`Name`, `Description`, `Syntax`, `Language`) VALUES (@NAME, @DESCRIPTION, @SYNTAX, @LANGUAGE);", connection);
+                command = new SQLiteCommand("INSERT INTO `UserBits` (`Name`, `Description`, `Syntax`, `Language`, `UserID`) VALUES (@NAME, @DESCRIPTION, @SYNTAX, @LANGUAGE, @USERID);", connection);
                 command.Parameters.Add("@LANGUAGE", DbType.Int16);
                 command.Parameters["@LANGUAGE"].Value = ActiveLang;
                 command.Parameters.AddWithValue("@NAME", NameOfBit.Text);
                 command.Parameters.AddWithValue("@DESCRIPTION", DescOfBit.Text);
                 command.Parameters.AddWithValue("@SYNTAX", ForCode.Text);
+                command.Parameters.Add("@USERID", DbType.Int16);
+                command.Parameters["@USERID"].Value = ActiveUser;
                 command.ExecuteNonQuery();
-                connection.Close();
             }
             UpdateAllElements(ActiveBitIndex);
         }
