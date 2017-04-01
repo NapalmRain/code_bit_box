@@ -19,7 +19,7 @@ namespace CodeBitBox
     public partial class Form1 : MaterialForm
     {
         int ActiveLang = 0, ActiveBitIndex = -1;
-        string ActiveBit = "0";
+        string ActiveBit = "-1";
         string baseName = "codebit.sqlite";
         SQLiteConnection connection;
 
@@ -28,7 +28,7 @@ namespace CodeBitBox
 
             connection = new SQLiteConnection(string.Format("Data Source={0};", baseName));
             connection.Open();
-            SQLiteCommand command = new SQLiteCommand("SELECT `id`, `Name`, `Description`, `Language` FROM `UserBits` WHERE `Language` = '"+ActiveLang.ToString()+"';", connection);
+            SQLiteCommand command = new SQLiteCommand("SELECT `id`, `Name`, `Description`, `Language`, `Syntax` FROM `UserBits` WHERE `Language` = '"+ActiveLang.ToString()+"';", connection);
             SQLiteDataReader CodeBits = command.ExecuteReader();
 
             while (CodeBits.Read())
@@ -38,6 +38,7 @@ namespace CodeBitBox
                 lvi.ImageIndex = CodeBits.GetInt16(3);
                 lvi.SubItems.Add(CodeBits.GetString(2));
                 lvi.SubItems.Add(CodeBits.GetInt16(0).ToString());
+                lvi.SubItems.Add(CodeBits.GetString(4));
 
             }
             connection.Close();
@@ -85,7 +86,7 @@ namespace CodeBitBox
                         ForCode.SetHighlighting("C#");
                         break;
                     case 2:
-                        ForCode.SetHighlighting("JS");
+                        ForCode.SetHighlighting("JavaScript");
                         break;
                     case 3:
                         ForCode.SetHighlighting("HTML");
@@ -98,7 +99,7 @@ namespace CodeBitBox
                         break;
                 }
                 connection.Open();
-                SQLiteCommand command = new SQLiteCommand("SELECT `id`, `Name`, `Description`, `Language` FROM `UserBits` WHERE `Language` = '" + ActiveLang.ToString() + "';", connection);
+                SQLiteCommand command = new SQLiteCommand("SELECT `id`, `Name`, `Description`, `Language`, `Syntax` FROM `UserBits` WHERE `Language` = '" + ActiveLang.ToString() + "';", connection);
                 SQLiteDataReader CodeBits = command.ExecuteReader();
 
                 while (CodeBits.Read())
@@ -108,6 +109,7 @@ namespace CodeBitBox
                     lvi.ImageIndex = CodeBits.GetInt16(3);
                     lvi.SubItems.Add(CodeBits.GetString(2));
                     lvi.SubItems.Add(CodeBits.GetInt16(0).ToString());
+                    lvi.SubItems.Add(CodeBits.GetString(4));
 
                 }
                 connection.Close();
@@ -119,17 +121,11 @@ namespace CodeBitBox
             if (listView2.SelectedIndices.Count>0) {
                 ActiveBitIndex = listView2.SelectedIndices[0];
                 ActiveBit = listView2.Items[listView2.SelectedIndices[0]].SubItems[2].Text;
-                connection.Open();
-                SQLiteCommand command = new SQLiteCommand("SELECT `Syntax`, `Name`, `Description` FROM `UserBits` WHERE `id` = '" + ActiveBit + "';", connection);
-                SQLiteDataReader CodeBits = command.ExecuteReader();
 
-                while (CodeBits.Read())
-                {
-                    NameOfBit.Text = CodeBits.GetString(1);
-                    DescOfBit.Text = CodeBits.GetString(2);
-                    ForCode.Text = CodeBits.GetString(0);
-                }
-                connection.Close();
+                NameOfBit.Text = listView2.Items[listView2.SelectedIndices[0]].Text;
+                DescOfBit.Text = listView2.Items[listView2.SelectedIndices[0]].SubItems[1].Text;
+                ForCode.Text = listView2.Items[listView2.SelectedIndices[0]].SubItems[3].Text;
+                ForCode.Refresh();
             }
         }
 
@@ -157,14 +153,99 @@ namespace CodeBitBox
             }
         }
 
-        private void button2_Click(object sender, EventArgs e) {
-            if (ActiveBit!="0") {
+        private void materialRaisedButton1_Click(object sender, EventArgs e)
+        {
+            ListViewItem lvi;
+            lvi = listView2.Items.Add("Новый кусок", ActiveLang);
+            lvi.SubItems.Add("Описание");
+            lvi.SubItems.Add("-1");
+            lvi.SubItems.Add(" ");
+        }
 
+     
+        private void ForCode_Enter(object sender, EventArgs e)
+        {
+            if (ActiveBitIndex >= 0)
+            {
+                listView2.Items[ActiveBitIndex].SubItems[3].Text = ForCode.Text;
+            }
+        }
+
+        private void ForCode_DockChanged(object sender, EventArgs e)
+        {
+            if (ActiveBitIndex >= 0)
+            {
+                listView2.Items[ActiveBitIndex].SubItems[3].Text = ForCode.Text;
+            }
+        }
+
+        private void ForCode_TextChanged(object sender, EventArgs e)
+        {
+            if (ActiveBitIndex >= 0)
+            {
+                listView2.Items[ActiveBitIndex].SubItems[3].Text = ForCode.Text;
+            }
+        }
+
+        private void item2ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (ActiveBitIndex >= 0)
+            {
                 connection.Open();
-                SQLiteCommand command = new SQLiteCommand("UPDATE `UserBits` SET `Name` = '" + NameOfBit.Text + "', `Description` = '"+DescOfBit.Text+"', `Syntax` = '"+ForCode.Text+"' WHERE `id` = '" + ActiveBit + "';", connection);
+                SQLiteCommand command = new SQLiteCommand("DELETE FROM `UserBits` WHERE `id` = '" + ActiveBit + "';", connection);
+                command.ExecuteNonQuery();
+                connection.Close();
+
+                listView2.Items.Clear();
+                connection.Open();
+                command = new SQLiteCommand("SELECT `id`, `Name`, `Description`, `Language`, `Syntax` FROM `UserBits` WHERE `Language` = '" + ActiveLang.ToString() + "';", connection);
+                SQLiteDataReader CodeBits = command.ExecuteReader();
+
+                while (CodeBits.Read())
+                {
+                    ListViewItem lvi;
+                    lvi = listView2.Items.Add(CodeBits.GetString(1), CodeBits.GetInt16(0));
+                    lvi.ImageIndex = CodeBits.GetInt16(3);
+                    lvi.SubItems.Add(CodeBits.GetString(2));
+                    lvi.SubItems.Add(CodeBits.GetInt16(0).ToString());
+                    lvi.SubItems.Add(CodeBits.GetString(4));
+
+                }
+                connection.Close();
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e) {
+            SQLiteCommand command;
+            if (ActiveBit!="-1") {
+                connection.Open();
+                command = new SQLiteCommand("UPDATE `UserBits` SET `Name` = '" + NameOfBit.Text + "', `Description` = '"+DescOfBit.Text+"', `Syntax` = '"+ForCode.Text+"' WHERE `id` = '" + ActiveBit + "';", connection);
+                command.ExecuteNonQuery();
+                connection.Close();
+            } else {
+                connection.Open();
+                command = new SQLiteCommand("INSERT INTO `UserBits` (`Name`, `Description`, `Syntax`, `Language`) VALUES ('" + NameOfBit.Text + "', '" + DescOfBit.Text + "', '" + ForCode.Text + "', '"+ActiveLang.ToString()+"');", connection);
                 command.ExecuteNonQuery();
                 connection.Close();
             }
+
+            listView2.Items.Clear();
+
+            connection.Open();
+            command = new SQLiteCommand("SELECT `id`, `Name`, `Description`, `Language`, `Syntax` FROM `UserBits` WHERE `Language` = '" + ActiveLang.ToString() + "';", connection);
+            SQLiteDataReader CodeBits = command.ExecuteReader();
+
+            while (CodeBits.Read())
+            {
+                ListViewItem lvi;
+                lvi = listView2.Items.Add(CodeBits.GetString(1), CodeBits.GetInt16(0));
+                lvi.ImageIndex = CodeBits.GetInt16(3);
+                lvi.SubItems.Add(CodeBits.GetString(2));
+                lvi.SubItems.Add(CodeBits.GetInt16(0).ToString());
+                lvi.SubItems.Add(CodeBits.GetString(4));
+
+            }
+            connection.Close();
         }
     }
 }

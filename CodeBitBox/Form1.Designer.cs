@@ -41,7 +41,6 @@
             System.Windows.Forms.ListViewItem listViewItem12 = new System.Windows.Forms.ListViewItem("SQL", 5);
             this.materialContextMenuStrip1 = new MaterialSkin.Controls.MaterialContextMenuStrip();
             this.item1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.item2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.listView1 = new System.Windows.Forms.ListView();
@@ -66,28 +65,24 @@
             this.materialContextMenuStrip1.Depth = 0;
             this.materialContextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.item1ToolStripMenuItem,
-            this.toolStripMenuItem1,
             this.item2ToolStripMenuItem});
             this.materialContextMenuStrip1.MouseState = MaterialSkin.MouseState.HOVER;
             this.materialContextMenuStrip1.Name = "materialContextMenuStrip1";
-            this.materialContextMenuStrip1.Size = new System.Drawing.Size(105, 54);
+            this.materialContextMenuStrip1.Size = new System.Drawing.Size(154, 70);
             // 
             // item1ToolStripMenuItem
             // 
             this.item1ToolStripMenuItem.Name = "item1ToolStripMenuItem";
-            this.item1ToolStripMenuItem.Size = new System.Drawing.Size(104, 22);
-            this.item1ToolStripMenuItem.Text = "item1";
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(101, 6);
+            this.item1ToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.item1ToolStripMenuItem.Text = "Add new";
+            this.item1ToolStripMenuItem.Click += new System.EventHandler(this.materialRaisedButton1_Click);
             // 
             // item2ToolStripMenuItem
             // 
             this.item2ToolStripMenuItem.Name = "item2ToolStripMenuItem";
-            this.item2ToolStripMenuItem.Size = new System.Drawing.Size(104, 22);
-            this.item2ToolStripMenuItem.Text = "Item2";
+            this.item2ToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.item2ToolStripMenuItem.Text = "Delete selected";
+            this.item2ToolStripMenuItem.Click += new System.EventHandler(this.item2ToolStripMenuItem_Click);
             // 
             // imageList1
             // 
@@ -184,6 +179,9 @@
             this.ForCode.ShowTabs = true;
             this.ForCode.Size = new System.Drawing.Size(693, 428);
             this.ForCode.TabIndex = 11;
+            this.ForCode.TextChanged += new System.EventHandler(this.ForCode_TextChanged);
+            this.ForCode.DockChanged += new System.EventHandler(this.ForCode_DockChanged);
+            this.ForCode.Enter += new System.EventHandler(this.ForCode_Enter);
             // 
             // DescOfBit
             // 
@@ -250,6 +248,7 @@
             this.materialRaisedButton1.TabIndex = 17;
             this.materialRaisedButton1.Text = "Добавить кусок";
             this.materialRaisedButton1.UseVisualStyleBackColor = true;
+            this.materialRaisedButton1.Click += new System.EventHandler(this.materialRaisedButton1_Click);
             // 
             // listView2
             // 
@@ -257,6 +256,7 @@
             this.listView2.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader2});
+            this.listView2.ContextMenuStrip = this.materialContextMenuStrip1;
             this.listView2.ForeColor = System.Drawing.Color.White;
             this.listView2.LargeImageList = this.imageList1;
             this.listView2.Location = new System.Drawing.Point(229, 107);
@@ -295,7 +295,6 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1187, 630);
-            this.ContextMenuStrip = this.materialContextMenuStrip1;
             this.Controls.Add(this.button2);
             this.Controls.Add(this.listView2);
             this.Controls.Add(this.materialRaisedButton1);
@@ -319,7 +318,6 @@
         #endregion
         private MaterialSkin.Controls.MaterialContextMenuStrip materialContextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem item1ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem item2ToolStripMenuItem;
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.ListView listView1;
