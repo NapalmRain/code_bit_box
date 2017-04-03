@@ -63,7 +63,7 @@ namespace CodeBitBox
             InitializeComponent();
 
             connection = new SQLiteConnection(string.Format("Data Source={0};", baseName));
-            secondForm = new SettingsForm(connection);
+            secondForm = new SettingsForm(connection, this);
 
             var materialSkinManager = MaterialSkinManager.Instance;
             materialSkinManager.AddFormToManage(this);

@@ -16,9 +16,11 @@ namespace CodeBitBox
     public partial class SettingsForm : MaterialForm
     {
         SQLiteConnection connection;
-        public SettingsForm(SQLiteConnection c)
+        Form1 f;
+        public SettingsForm(SQLiteConnection c, Form1 f1)
         {
             connection = c;
+            f = f1;
             InitializeComponent();
         }
 
@@ -37,7 +39,18 @@ namespace CodeBitBox
                 }
                 command.ExecuteNonQuery();
             }
-            this.Close();
+            f.listView1.Items.Clear();
+            command = new SQLiteCommand("SELECT `id`, `Name`, `SyntaxPrefix`, `IconIndex` FROM `Languages` WHERE `Active` = 1", connection);
+            SQLiteDataReader CodeBits = command.ExecuteReader();
+
+            while (CodeBits.Read())
+            {
+                ListViewItem lvi;
+                lvi = f.listView1.Items.Add(CodeBits.GetString(1), CodeBits.GetInt16(3));
+                lvi.SubItems.Add(CodeBits.GetString(2));
+                lvi.SubItems.Add(CodeBits.GetInt16(0).ToString());
+            }
+            this.Hide();
         }
     }
 }
