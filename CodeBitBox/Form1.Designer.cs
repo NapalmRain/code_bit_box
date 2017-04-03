@@ -49,7 +49,7 @@
             this.button2 = new System.Windows.Forms.Button();
             this.DeleteButton = new System.Windows.Forms.Button();
             this.ForCode = new ICSharpCode.TextEditor.TextEditorControl();
-            this.button3 = new System.Windows.Forms.Button();
+            this.SettingsButton = new System.Windows.Forms.Button();
             this.materialContextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -294,23 +294,24 @@
             this.ForCode.TabIndex = 8;
             this.ForCode.TextChanged += new System.EventHandler(this.IsTextChanged);
             // 
-            // button3
+            // SettingsButton
             // 
-            this.button3.BackColor = System.Drawing.Color.Teal;
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Image = ((System.Drawing.Image)(resources.GetObject("button3.Image")));
-            this.button3.Location = new System.Drawing.Point(1131, 23);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(44, 41);
-            this.button3.TabIndex = 20;
-            this.button3.UseVisualStyleBackColor = false;
+            this.SettingsButton.BackColor = System.Drawing.Color.Teal;
+            this.SettingsButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.SettingsButton.Image = ((System.Drawing.Image)(resources.GetObject("SettingsButton.Image")));
+            this.SettingsButton.Location = new System.Drawing.Point(1131, 23);
+            this.SettingsButton.Name = "SettingsButton";
+            this.SettingsButton.Size = new System.Drawing.Size(44, 41);
+            this.SettingsButton.TabIndex = 20;
+            this.SettingsButton.UseVisualStyleBackColor = false;
+            this.SettingsButton.Click += new System.EventHandler(this.SettingsButton_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1187, 851);
-            this.Controls.Add(this.button3);
+            this.Controls.Add(this.SettingsButton);
             this.Controls.Add(this.ForCode);
             this.Controls.Add(this.DeleteButton);
             this.Controls.Add(this.button2);
@@ -354,7 +355,7 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button DeleteButton;
         private ICSharpCode.TextEditor.TextEditorControl ForCode;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button SettingsButton;
     }
 }
 

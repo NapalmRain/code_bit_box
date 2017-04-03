@@ -125,6 +125,7 @@ namespace CodeBitBox
             NameOfBit.Width = this.Width - 613;
             DescOfBit.Width = this.Width - 613;
             DeleteButton.Left = this.Width - 118;
+            SettingsButton.Left = this.Width - 56;
         }
 
         
@@ -271,6 +272,12 @@ namespace CodeBitBox
             {
                 listView2.Items[ActiveBitIndex].SubItems[1].Text = DescOfBit.Text;
             }
+        }
+
+        private void SettingsButton_Click(object sender, EventArgs e)
+        {
+            SettingsForm secondForm = new SettingsForm();
+            secondForm.Show();
         }
 
         private void IsTextChanged(object sender, EventArgs e)

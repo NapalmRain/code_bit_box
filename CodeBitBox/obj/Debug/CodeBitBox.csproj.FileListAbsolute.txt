@@ -38,3 +38,4 @@ F:\Projects\CodeBit\code_bit_box\CodeBitBox\bin\Debug\EntityFramework.xml
 F:\Projects\CodeBit\code_bit_box\CodeBitBox\bin\Debug\EntityFramework.SqlServer.xml
 F:\Projects\CodeBit\code_bit_box\CodeBitBox\bin\Debug\System.Data.SQLite.xml
 F:\Projects\CodeBit\code_bit_box\CodeBitBox\bin\Debug\System.Data.SQLite.dll.config
+d:\Projects\ForWork\BitBox\CodeBitBox\obj\Debug\CodeBitBox.SettingsForm.resources
