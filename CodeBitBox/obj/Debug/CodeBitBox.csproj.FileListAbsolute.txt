@@ -8,7 +8,6 @@ D:\Projects\ForWork\BitBox\CodeBitBox\obj\Debug\CodeBitBox.csproj.GenerateResour
 D:\Projects\ForWork\BitBox\CodeBitBox\obj\Debug\CodeBitBox.exe
 D:\Projects\ForWork\BitBox\CodeBitBox\obj\Debug\CodeBitBox.pdb
 D:\Projects\ForWork\BitBox\CodeBitBox\bin\Debug\MaterialSkin.dll
-D:\Projects\ForWork\BitBox\CodeBitBox\bin\Debug\jSkin.dll
 D:\Projects\ForWork\BitBox\CodeBitBox\bin\Debug\ICSharpCode.TextEditor.dll
 D:\Projects\ForWork\BitBox\CodeBitBox\bin\Debug\EntityFramework.dll
 D:\Projects\ForWork\BitBox\CodeBitBox\bin\Debug\EntityFramework.SqlServer.dll

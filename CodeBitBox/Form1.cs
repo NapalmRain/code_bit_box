@@ -24,6 +24,8 @@ namespace CodeBitBox
         SQLiteConnection connection;
 
         private void UpdateAllElements(int ID = -1) {
+            ActiveBit = "-1";
+            ActiveBitIndex = -1;
             listView2.Items.Clear();
 
             SQLiteCommand command = new SQLiteCommand("SELECT `id`, `Name`, `Description`, `Language`, `Syntax` FROM `UserBits` WHERE `Language` = @ID AND `UserID` = @USERID", connection);
@@ -49,11 +51,9 @@ namespace CodeBitBox
             ForCode.Refresh();
             NameOfBit.Text = "";
             DescOfBit.Text = "";
-            if (ID >=0)
-            {
+            if (ID >=0) {
                 listView2.Items[ID].Selected = true;
-            } else
-            {
+            } else {
                 ActiveBit = ID.ToString();
                 ActiveBitIndex = ID;
             }
@@ -93,6 +93,17 @@ namespace CodeBitBox
                 
             }
 
+            command = new SQLiteCommand("SELECT `id`, `Name`, `SyntaxPrefix`, `IconIndex` FROM `Languages` WHERE `Active` = 1", connection);
+            CodeBits = command.ExecuteReader();
+
+            while (CodeBits.Read())
+            {
+                ListViewItem lvi;
+                lvi = listView1.Items.Add(CodeBits.GetString(1), CodeBits.GetInt16(3));
+                lvi.SubItems.Add(CodeBits.GetString(2));
+                lvi.SubItems.Add(CodeBits.GetInt16(0).ToString());
+            }
+
             UpdateAllElements();
 
         }
@@ -122,92 +133,69 @@ namespace CodeBitBox
         private void ListView1_SelectedIndexChanged(object sender, EventArgs e) {
             ForCode.Text = "";
             ForCode.Refresh();
+            ForCode.Enabled = false;
             NameOfBit.Text = "";
+            NameOfBit.Enabled = false;
             DescOfBit.Text = "";
+            DescOfBit.Enabled = false;
             ActiveBit = "-1";
             ActiveBitIndex = -1;
 
             if (listView1.SelectedIndices.Count > 0)
             {
-                ActiveLang = listView1.SelectedIndices[0];
+                ActiveLang = Int32.Parse(listView1.Items[listView1.SelectedIndices[0]].SubItems[2].Text);
+
+                MessageBox.Show(ActiveLang.ToString(), "d");
+
                 ActiveBitIndex = -1;
                 listView2.Items.Clear();
-                switch (ActiveLang)
-                {
-                    case 0:
-                        ForCode.SetHighlighting("PHP");
-                        break;
-                    case 1:
-                        ForCode.SetHighlighting("C#");
-                        break;
-                    case 2:
-                        ForCode.SetHighlighting("JavaScript");
-                        break;
-                    case 3:
-                        ForCode.SetHighlighting("HTML");
-                        break;
-                    case 4:
-                        ForCode.SetHighlighting("CSS");
-                        break;
-                    case 5:
-                        ForCode.SetHighlighting("SQL");
-                        break;
-                }
+                String Synt = listView1.Items[listView1.SelectedIndices[0]].SubItems[1].Text;
+                ForCode.SetHighlighting(Synt);
+                
                 UpdateAllElements();
             }
                 
         }
 
-        private void listView2_SelectedIndexChanged(object sender, EventArgs e) {
+        private void ListView2_SelectedIndexChanged(object sender, EventArgs e) {
             if (listView2.SelectedIndices.Count>0) {
                 ActiveBitIndex = listView2.SelectedIndices[0];
                 ActiveBit = listView2.Items[listView2.SelectedIndices[0]].SubItems[2].Text;
 
                 NameOfBit.Text = listView2.Items[listView2.SelectedIndices[0]].Text;
+                NameOfBit.Enabled = true;
                 DescOfBit.Text = listView2.Items[listView2.SelectedIndices[0]].SubItems[1].Text;
+                DescOfBit.Enabled = true;
                 ForCode.Text = listView2.Items[listView2.SelectedIndices[0]].SubItems[3].Text;
                 ForCode.Refresh();
+                ForCode.Enabled = true;
             } else {
                 ActiveBitIndex = -1;
                 ActiveBit = "-1";
                 NameOfBit.Text = "";
+                NameOfBit.Enabled = false;
                 DescOfBit.Text = "";
+                DescOfBit.Enabled = false;
                 ForCode.Text = "";
                 ForCode.Refresh();
+                ForCode.Enabled = false;
             }
         }
 
-        private void NameOfBit_Enter(object sender, EventArgs e)
+        private void MaterialRaisedButton1_Click(object sender, EventArgs e)
         {
-            if (ActiveBitIndex>=0)
-            {
-                listView2.Items[ActiveBitIndex].Text = NameOfBit.Text;
-            }
-        }
-
-        private void NameOfBit_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (ActiveBitIndex >= 0)
-            {
-                listView2.Items[ActiveBitIndex].Text = NameOfBit.Text;
-            }
-        }
-
-        private void DescOfBit_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (ActiveBitIndex >= 0)
-            {
-                listView2.Items[ActiveBitIndex].SubItems[1].Text = DescOfBit.Text;
-            }
-        }
-
-        private void materialRaisedButton1_Click(object sender, EventArgs e)
-        {
-            ListViewItem lvi;
-            lvi = listView2.Items.Add("Новый кусок", ActiveLang);
-            lvi.SubItems.Add("Описание");
-            lvi.SubItems.Add("-1");
-            lvi.SubItems.Add(" ");
+            Button2_Click(null, null);
+            SQLiteCommand command = new SQLiteCommand("INSERT INTO `UserBits` (`Name`, `Description`, `Syntax`, `Language`, `UserID`) VALUES (@NAME, @DESCRIPTION, @SYNTAX, @LANGUAGE, @USERID);", connection);
+            command.Parameters.Add("@LANGUAGE", DbType.Int16);
+            command.Parameters["@LANGUAGE"].Value = ActiveLang;
+            command.Parameters.AddWithValue("@NAME", "NewBit");
+            command.Parameters.AddWithValue("@DESCRIPTION", "BitDescription");
+            command.Parameters.AddWithValue("@SYNTAX", "");
+            command.Parameters.Add("@USERID", DbType.Int16);
+            command.Parameters["@USERID"].Value = ActiveUser;
+            command.ExecuteNonQuery();
+            UpdateAllElements();
+            listView2.Items[listView2.Items.Count - 1].Selected = true;
         }
 
      
@@ -235,7 +223,7 @@ namespace CodeBitBox
             }
         }
 
-        private void item2ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void Item2ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (ActiveBitIndex >= 0)
             {
@@ -253,6 +241,8 @@ namespace CodeBitBox
                     command.ExecuteNonQuery();
 
                     UpdateAllElements();
+                    ActiveBitIndex = -1;
+                    ActiveBit = "-1";
                 }
             }
         }
@@ -262,33 +252,77 @@ namespace CodeBitBox
             connection.Close();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void NameOfBit_KeyUp(object sender, EventArgs e)
         {
-            Clipboard.SetText(ForCode.Text);
+            if (NameOfBit.Text.Length>25) {
+                NameOfBit.Text = NameOfBit.Text.Substring(0, 25);
+                NameOfBit.SelectionStart = NameOfBit.Text.Length;
+            }
+            if (ActiveBitIndex >= 0)
+            {
+                listView2.Items[ActiveBitIndex].Text = NameOfBit.Text;
+            }
         }
 
-        private void button2_Click(object sender, EventArgs e) {
-            SQLiteCommand command;
-            if (ActiveBit!="-1") {
-                command = new SQLiteCommand("UPDATE `UserBits` SET `Name` = @NAME, `Description` = @DESCRIPTION, `Syntax` = @SYNTAX WHERE `id` = @ID;", connection);
-                command.Parameters.Add("@ID", DbType.Int16);
-                command.Parameters["@ID"].Value = ActiveBit;
-                command.Parameters.AddWithValue("@NAME", NameOfBit.Text);
-                command.Parameters.AddWithValue("@DESCRIPTION", DescOfBit.Text);
-                command.Parameters.AddWithValue("@SYNTAX", ForCode.Text);
-                command.ExecuteNonQuery();
-            } else {
-                command = new SQLiteCommand("INSERT INTO `UserBits` (`Name`, `Description`, `Syntax`, `Language`, `UserID`) VALUES (@NAME, @DESCRIPTION, @SYNTAX, @LANGUAGE, @USERID);", connection);
-                command.Parameters.Add("@LANGUAGE", DbType.Int16);
-                command.Parameters["@LANGUAGE"].Value = ActiveLang;
-                command.Parameters.AddWithValue("@NAME", NameOfBit.Text);
-                command.Parameters.AddWithValue("@DESCRIPTION", DescOfBit.Text);
-                command.Parameters.AddWithValue("@SYNTAX", ForCode.Text);
-                command.Parameters.Add("@USERID", DbType.Int16);
-                command.Parameters["@USERID"].Value = ActiveUser;
-                command.ExecuteNonQuery();
+        private void DescOfBit_TextChanged(object sender, EventArgs e)
+        {
+            if (DescOfBit.Text.Length > 125)
+            {
+                DescOfBit.Text = DescOfBit.Text.Substring(0, 125);
+                DescOfBit.SelectionStart = DescOfBit.Text.Length;
             }
-            UpdateAllElements(ActiveBitIndex);
+            if (ActiveBitIndex >= 0)
+            {
+                listView2.Items[ActiveBitIndex].SubItems[1].Text = DescOfBit.Text;
+            }
+        }
+
+        private void IsTextChanged(object sender, EventArgs e)
+        {
+            if (ActiveBitIndex >= 0)
+            {
+                listView2.Items[ActiveBitIndex].SubItems[3].Text = ForCode.Text;
+            }
+        }
+
+        private void Button1_Click(object sender, EventArgs e) {
+            if (ForCode.Text.Length>0) {
+                Clipboard.SetText(ForCode.Text);
+            }
+        }
+
+        private void Button2_Click(object sender, EventArgs e) {
+            if (ActiveBitIndex >= 0) {
+                if (NameOfBit.Text.Length <= 0)
+                {
+                    MessageBox.Show("Please input Name for save", "WARNING");
+                    return;
+                }
+                SQLiteCommand command;
+                if (ActiveBit != "-1")
+                {
+                    command = new SQLiteCommand("UPDATE `UserBits` SET `Name` = @NAME, `Description` = @DESCRIPTION, `Syntax` = @SYNTAX WHERE `id` = @ID;", connection);
+                    command.Parameters.Add("@ID", DbType.Int16);
+                    command.Parameters["@ID"].Value = ActiveBit;
+                    command.Parameters.AddWithValue("@NAME", NameOfBit.Text);
+                    command.Parameters.AddWithValue("@DESCRIPTION", DescOfBit.Text);
+                    command.Parameters.AddWithValue("@SYNTAX", ForCode.Text);
+                    command.ExecuteNonQuery();
+                }
+                else
+                {
+                    command = new SQLiteCommand("INSERT INTO `UserBits` (`Name`, `Description`, `Syntax`, `Language`, `UserID`) VALUES (@NAME, @DESCRIPTION, @SYNTAX, @LANGUAGE, @USERID);", connection);
+                    command.Parameters.Add("@LANGUAGE", DbType.Int16);
+                    command.Parameters["@LANGUAGE"].Value = ActiveLang;
+                    command.Parameters.AddWithValue("@NAME", NameOfBit.Text);
+                    command.Parameters.AddWithValue("@DESCRIPTION", DescOfBit.Text);
+                    command.Parameters.AddWithValue("@SYNTAX", ForCode.Text);
+                    command.Parameters.Add("@USERID", DbType.Int16);
+                    command.Parameters["@USERID"].Value = ActiveUser;
+                    command.ExecuteNonQuery();
+                }
+                UpdateAllElements(ActiveBitIndex);
+            }
         }
     }
 }

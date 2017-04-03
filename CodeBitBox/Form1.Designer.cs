@@ -31,14 +31,6 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             System.Windows.Forms.ListViewGroup listViewGroup1 = new System.Windows.Forms.ListViewGroup("Языки программирования", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
-            "PHP",
-            "cds"}, 0);
-            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("C#", 1);
-            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("JS", 2);
-            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("HTML", 3);
-            System.Windows.Forms.ListViewItem listViewItem5 = new System.Windows.Forms.ListViewItem("CSS", 4);
-            System.Windows.Forms.ListViewItem listViewItem6 = new System.Windows.Forms.ListViewItem("SQL", 5);
             this.materialContextMenuStrip1 = new MaterialSkin.Controls.MaterialContextMenuStrip();
             this.item1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.item2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -57,6 +49,7 @@
             this.button2 = new System.Windows.Forms.Button();
             this.DeleteButton = new System.Windows.Forms.Button();
             this.ForCode = new ICSharpCode.TextEditor.TextEditorControl();
+            this.button3 = new System.Windows.Forms.Button();
             this.materialContextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -76,14 +69,14 @@
             this.item1ToolStripMenuItem.Name = "item1ToolStripMenuItem";
             this.item1ToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.item1ToolStripMenuItem.Text = "Add new";
-            this.item1ToolStripMenuItem.Click += new System.EventHandler(this.materialRaisedButton1_Click);
+            this.item1ToolStripMenuItem.Click += new System.EventHandler(this.MaterialRaisedButton1_Click);
             // 
             // item2ToolStripMenuItem
             // 
             this.item2ToolStripMenuItem.Name = "item2ToolStripMenuItem";
             this.item2ToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.item2ToolStripMenuItem.Text = "Delete selected";
-            this.item2ToolStripMenuItem.Click += new System.EventHandler(this.item2ToolStripMenuItem_Click);
+            this.item2ToolStripMenuItem.Click += new System.EventHandler(this.Item2ToolStripMenuItem_Click);
             // 
             // imageList1
             // 
@@ -95,6 +88,13 @@
             this.imageList1.Images.SetKeyName(3, "html.png");
             this.imageList1.Images.SetKeyName(4, "css.png");
             this.imageList1.Images.SetKeyName(5, "SQL.png");
+            this.imageList1.Images.SetKeyName(6, "cpp.png");
+            this.imageList1.Images.SetKeyName(7, "pb.png");
+            this.imageList1.Images.SetKeyName(8, "java.png");
+            this.imageList1.Images.SetKeyName(9, "swift.png");
+            this.imageList1.Images.SetKeyName(10, "python.png");
+            this.imageList1.Images.SetKeyName(11, "delphi.png");
+            this.imageList1.Images.SetKeyName(12, "ruby.png");
             // 
             // listView1
             // 
@@ -106,24 +106,9 @@
             listViewGroup1.Name = "listViewGroup1";
             this.listView1.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
             listViewGroup1});
-            listViewItem1.Checked = true;
-            listViewItem1.Group = listViewGroup1;
-            listViewItem1.StateImageIndex = 1;
-            listViewItem2.Group = listViewGroup1;
-            listViewItem2.StateImageIndex = 0;
-            listViewItem3.Group = listViewGroup1;
-            listViewItem4.Group = listViewGroup1;
-            listViewItem5.Group = listViewGroup1;
-            this.listView1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1,
-            listViewItem2,
-            listViewItem3,
-            listViewItem4,
-            listViewItem5,
-            listViewItem6});
             this.listView1.LabelWrap = false;
             this.listView1.LargeImageList = this.imageList1;
-            this.listView1.Location = new System.Drawing.Point(1, 107);
+            this.listView1.Location = new System.Drawing.Point(3, 107);
             this.listView1.MultiSelect = false;
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(222, 511);
@@ -149,6 +134,7 @@
             // NameOfBit
             // 
             this.NameOfBit.Depth = 0;
+            this.NameOfBit.Enabled = false;
             this.NameOfBit.Hint = "";
             this.NameOfBit.Location = new System.Drawing.Point(601, 73);
             this.NameOfBit.MouseState = MaterialSkin.MouseState.HOVER;
@@ -161,12 +147,12 @@
             this.NameOfBit.TabIndex = 4;
             this.NameOfBit.Text = "...";
             this.NameOfBit.UseSystemPasswordChar = false;
-            this.NameOfBit.Enter += new System.EventHandler(this.NameOfBit_Enter);
-            this.NameOfBit.KeyUp += new System.Windows.Forms.KeyEventHandler(this.NameOfBit_KeyUp);
+            this.NameOfBit.TextChanged += new System.EventHandler(this.NameOfBit_KeyUp);
             // 
             // DescOfBit
             // 
             this.DescOfBit.Depth = 0;
+            this.DescOfBit.Enabled = false;
             this.DescOfBit.Hint = "";
             this.DescOfBit.Location = new System.Drawing.Point(601, 102);
             this.DescOfBit.MouseState = MaterialSkin.MouseState.HOVER;
@@ -179,7 +165,7 @@
             this.DescOfBit.TabIndex = 5;
             this.DescOfBit.Text = "...";
             this.DescOfBit.UseSystemPasswordChar = false;
-            this.DescOfBit.KeyUp += new System.Windows.Forms.KeyEventHandler(this.DescOfBit_KeyUp);
+            this.DescOfBit.TextChanged += new System.EventHandler(this.DescOfBit_TextChanged);
             // 
             // materialLabel2
             // 
@@ -218,7 +204,7 @@
             this.button1.Text = "Copy";
             this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
             // materialRaisedButton1
             // 
@@ -231,7 +217,7 @@
             this.materialRaisedButton1.TabIndex = 2;
             this.materialRaisedButton1.Text = "Add new Bit";
             this.materialRaisedButton1.UseVisualStyleBackColor = true;
-            this.materialRaisedButton1.Click += new System.EventHandler(this.materialRaisedButton1_Click);
+            this.materialRaisedButton1.Click += new System.EventHandler(this.MaterialRaisedButton1_Click);
             // 
             // listView2
             // 
@@ -249,7 +235,7 @@
             this.listView2.TabIndex = 3;
             this.listView2.UseCompatibleStateImageBehavior = false;
             this.listView2.View = System.Windows.Forms.View.Tile;
-            this.listView2.SelectedIndexChanged += new System.EventHandler(this.listView2_SelectedIndexChanged);
+            this.listView2.SelectedIndexChanged += new System.EventHandler(this.ListView2_SelectedIndexChanged);
             // 
             // columnHeader1
             // 
@@ -271,7 +257,7 @@
             this.button2.Text = "Save";
             this.button2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.button2.Click += new System.EventHandler(this.Button2_Click);
             // 
             // DeleteButton
             // 
@@ -289,7 +275,7 @@
             this.DeleteButton.Text = "Delete";
             this.DeleteButton.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.DeleteButton.UseVisualStyleBackColor = false;
-            this.DeleteButton.Click += new System.EventHandler(this.item2ToolStripMenuItem_Click);
+            this.DeleteButton.Click += new System.EventHandler(this.Item2ToolStripMenuItem_Click);
             // 
             // ForCode
             // 
@@ -297,6 +283,7 @@
             this.ForCode.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.ForCode.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("ForCode.BackgroundImage")));
             this.ForCode.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ForCode.Enabled = false;
             this.ForCode.ForeColor = System.Drawing.Color.White;
             this.ForCode.IsReadOnly = false;
             this.ForCode.Location = new System.Drawing.Point(482, 190);
@@ -305,12 +292,25 @@
             this.ForCode.ShowTabs = true;
             this.ForCode.Size = new System.Drawing.Size(693, 428);
             this.ForCode.TabIndex = 8;
+            this.ForCode.TextChanged += new System.EventHandler(this.IsTextChanged);
+            // 
+            // button3
+            // 
+            this.button3.BackColor = System.Drawing.Color.Teal;
+            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button3.Image = ((System.Drawing.Image)(resources.GetObject("button3.Image")));
+            this.button3.Location = new System.Drawing.Point(1131, 23);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(44, 41);
+            this.button3.TabIndex = 20;
+            this.button3.UseVisualStyleBackColor = false;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1187, 630);
+            this.Controls.Add(this.button3);
             this.Controls.Add(this.ForCode);
             this.Controls.Add(this.DeleteButton);
             this.Controls.Add(this.button2);
@@ -354,6 +354,7 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button DeleteButton;
         private ICSharpCode.TextEditor.TextEditorControl ForCode;
+        private System.Windows.Forms.Button button3;
     }
 }
 
