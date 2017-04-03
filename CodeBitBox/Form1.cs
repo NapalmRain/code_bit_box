@@ -21,7 +21,8 @@ namespace CodeBitBox
         int ActiveLang = 0, ActiveBitIndex = -1, ActiveUser = 0, IconIndex = 0;
         string ActiveBit = "-1";
         string baseName = "codebit.sqlite";
-        SQLiteConnection connection;
+        public SQLiteConnection connection;
+        SettingsForm secondForm;
 
         private void UpdateAllElements(int ID = -1) {
             ActiveBit = "-1";
@@ -62,7 +63,8 @@ namespace CodeBitBox
             InitializeComponent();
 
             connection = new SQLiteConnection(string.Format("Data Source={0};", baseName));
-            
+            secondForm = new SettingsForm(connection);
+
             var materialSkinManager = MaterialSkinManager.Instance;
             materialSkinManager.AddFormToManage(this);
             materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
@@ -104,6 +106,21 @@ namespace CodeBitBox
             }
 
             UpdateAllElements();
+
+            command = new SQLiteCommand("SELECT `id`, `Name`, `SyntaxPrefix`, `IconIndex`, `Active` FROM `Languages`", connection);
+            CodeBits = command.ExecuteReader();
+
+            while (CodeBits.Read())
+            {
+                ListViewItem lvi;
+                lvi = secondForm.listView1.Items.Add(CodeBits.GetString(1), CodeBits.GetInt16(3));
+                lvi.SubItems.Add(CodeBits.GetInt16(0).ToString());
+                if (CodeBits.GetInt16(4) == 1) {
+                    lvi.Checked = true;
+                } else {
+                    lvi.Checked = false;
+                }
+            }
 
         }
 
@@ -276,7 +293,6 @@ namespace CodeBitBox
 
         private void SettingsButton_Click(object sender, EventArgs e)
         {
-            SettingsForm secondForm = new SettingsForm();
             secondForm.Show();
         }
 
