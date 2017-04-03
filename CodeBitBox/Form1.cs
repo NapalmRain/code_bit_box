@@ -18,7 +18,7 @@ namespace CodeBitBox
 {
     public partial class Form1 : MaterialForm
     {
-        int ActiveLang = 0, ActiveBitIndex = -1, ActiveUser = 0;
+        int ActiveLang = 0, ActiveBitIndex = -1, ActiveUser = 0, IconIndex = 0;
         string ActiveBit = "-1";
         string baseName = "codebit.sqlite";
         SQLiteConnection connection;
@@ -39,8 +39,7 @@ namespace CodeBitBox
             while (CodeBits.Read())
             {
                 ListViewItem lvi;
-                lvi = listView2.Items.Add(CodeBits.GetString(1), CodeBits.GetInt16(0));
-                lvi.ImageIndex = CodeBits.GetInt16(3);
+                lvi = listView2.Items.Add(CodeBits.GetString(1), IconIndex);
                 lvi.SubItems.Add(CodeBits.GetString(2));
                 lvi.SubItems.Add(CodeBits.GetInt16(0).ToString());
                 lvi.SubItems.Add(CodeBits.GetString(4));
@@ -112,7 +111,6 @@ namespace CodeBitBox
             string dirc = Application.StartupPath;
             FileSyntaxModeProvider fsmp;
             if (Directory.Exists(dirc)) {
-
                 fsmp = new FileSyntaxModeProvider(dirc);
                 HighlightingManager.Manager.AddSyntaxModeFileProvider(fsmp);
                 ForCode.SetHighlighting("PHP");
@@ -144,9 +142,7 @@ namespace CodeBitBox
             if (listView1.SelectedIndices.Count > 0)
             {
                 ActiveLang = Int32.Parse(listView1.Items[listView1.SelectedIndices[0]].SubItems[2].Text);
-
-                MessageBox.Show(ActiveLang.ToString(), "d");
-
+                IconIndex = listView1.Items[listView1.SelectedIndices[0]].ImageIndex;
                 ActiveBitIndex = -1;
                 listView2.Items.Clear();
                 String Synt = listView1.Items[listView1.SelectedIndices[0]].SubItems[1].Text;

@@ -111,7 +111,7 @@
             this.listView1.Location = new System.Drawing.Point(3, 107);
             this.listView1.MultiSelect = false;
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(222, 511);
+            this.listView1.Size = new System.Drawing.Size(222, 732);
             this.listView1.SmallImageList = this.imageList1;
             this.listView1.TabIndex = 1;
             this.listView1.UseCompatibleStateImageBehavior = false;
@@ -231,7 +231,7 @@
             this.listView2.Location = new System.Drawing.Point(229, 107);
             this.listView2.MultiSelect = false;
             this.listView2.Name = "listView2";
-            this.listView2.Size = new System.Drawing.Size(238, 511);
+            this.listView2.Size = new System.Drawing.Size(238, 732);
             this.listView2.TabIndex = 3;
             this.listView2.UseCompatibleStateImageBehavior = false;
             this.listView2.View = System.Windows.Forms.View.Tile;
@@ -290,7 +290,7 @@
             this.ForCode.Name = "ForCode";
             this.ForCode.ShowSpaces = true;
             this.ForCode.ShowTabs = true;
-            this.ForCode.Size = new System.Drawing.Size(693, 428);
+            this.ForCode.Size = new System.Drawing.Size(693, 649);
             this.ForCode.TabIndex = 8;
             this.ForCode.TextChanged += new System.EventHandler(this.IsTextChanged);
             // 
@@ -309,7 +309,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1187, 630);
+            this.ClientSize = new System.Drawing.Size(1187, 851);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.ForCode);
             this.Controls.Add(this.DeleteButton);
