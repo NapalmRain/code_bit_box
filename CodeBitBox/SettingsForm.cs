@@ -26,18 +26,19 @@ namespace CodeBitBox
 
         private void materialRaisedButton1_Click(object sender, EventArgs e)
         {
-            SQLiteCommand command = new SQLiteCommand("UPDATE `Languages` SET `Active` = @ACTIVE WHERE `id` = @ID;", connection);
+            SQLiteCommand command = new SQLiteCommand("UPDATE `Languages` SET `Active` = 1", connection);
+            command.ExecuteNonQuery();
+
+            command = new SQLiteCommand("UPDATE `Languages` SET `Active` = @ACTIVE WHERE `id` = @ID;", connection);
 
             for (int i = 0; i < listView1.Items.Count; i++)
             {
-                command.Parameters.Add("@ID", DbType.Int16);
-                command.Parameters["@ID"].Value = listView1.Items[i].SubItems[1].Text;
-                if (listView1.Items[i].Checked) {
-                    command.Parameters.AddWithValue("@ACTIVE", 1);
-                } else {
+                if (!listView1.Items[i].Checked) {
+                    command.Parameters.Add("@ID", DbType.Int16);
+                    command.Parameters["@ID"].Value = listView1.Items[i].SubItems[1].Text;
                     command.Parameters.AddWithValue("@ACTIVE", 0);
+                    command.ExecuteNonQuery();
                 }
-                command.ExecuteNonQuery();
             }
             f.listView1.Items.Clear();
             command = new SQLiteCommand("SELECT `id`, `Name`, `SyntaxPrefix`, `IconIndex` FROM `Languages` WHERE `Active` = 1", connection);
